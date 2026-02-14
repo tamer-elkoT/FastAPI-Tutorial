@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from typing import Optional
 from pydantic import BaseModel
+import uvicorn 
 # Create an instance of FastAPI Object
 app = FastAPI()
 
@@ -46,4 +47,15 @@ class Blog(BaseModel):
 def create_blog(request:Blog):
     return {"data": f"my {request.title} is created"}
 
-
+######################## Debugging The FastAPI ###########################
+# 1. go to the section you want to breakpoin and press on the red dot
+# 2. press CTRL + Shift + D
+# 3. Choose Debug: Restart
+# 4. Python Debuger
+# 5. choose FastAPI launch and Debugging 
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8500)
+# To run the the FastAPI Without using the command uvicorn main:app --reload
+# run this from the command line
+# python3 main.py 
+# To Kill the FastAPI Server run >> CTRL + C if not work try>>  fuser -k 8000/tcp
