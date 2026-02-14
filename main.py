@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from typing import Optional
-
+from pydantic import BaseModel
 # Create an instance of FastAPI Object
 app = FastAPI()
 
@@ -32,5 +32,18 @@ def blog(limit: int = 10,published: bool = False, sort: Optional[str] = None):
 def comments(id: int, limit: int = 15): # id: int to set the acceptable data type for this function
     return {f"{limit} comments from the db with id of {id}:"}
 
+
+############################# Create Blog Using Post Method ###########################
+# Create a pydantic BaseModel class 
+class Blog(BaseModel):
+    # make the fields that will be in the response 
+    title: str
+    body: str
+    published: Optional[bool] # Set the published field as optional
+
+@app.post("/blog")
+# request:Blog >> (request) here represent the request body that the client will send & (Blog) here is the Base Model from bydantic 
+def create_blog(request:Blog):
+    return {"data": f"my {request.title} is created"}
 
 
