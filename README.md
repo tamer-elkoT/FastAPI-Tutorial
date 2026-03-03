@@ -59,3 +59,5 @@ git commit -m "your comment"
 git tag -a tag-name -m "comment"
 git push origin tag-name
 ```
+# FastAPI Integration with SQLALCHEMY
+
